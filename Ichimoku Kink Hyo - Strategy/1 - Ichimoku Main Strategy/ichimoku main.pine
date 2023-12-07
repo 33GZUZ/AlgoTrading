@@ -52,10 +52,13 @@ kijun_below_kumo = kijun < ss_low
 // short signal when above conditions allign
 bearish = tk_cross_bear and cs_cross_bear and price_below_kumo and kijun_below_kumo
 
+// Generate alerts
+alertcondition(bullish, title="Long Signal", message="Ichimoku Long Signal")
+alertcondition(bearish, title="Short Signal", message="Ichimoku Short Signal")
+
+//Entry and exit logic
 strategy.entry('Long', strategy.long, when=bullish and long_entry)
 strategy.close('Long', when=bearish and not short_entry)
 
 strategy.entry('Short', strategy.short, when=bearish and short_entry)
 strategy.close('Short', when=bullish and not long_entry)
-
-
